@@ -6,6 +6,10 @@
 var stringifyJSON = function(obj) {
   // your code goes here
   // BASE CASE 
+  // Primitives
+  // Numbers
+  // Strings
+  // Booleans
   
   // if typof of 'obj' is 'string' or 'boolean' 
   // return '"' + obj + '"'
@@ -21,14 +25,6 @@ var stringifyJSON = function(obj) {
   if (obj === null) {
     return 'null';
   }
-
-  // Primitives
-  // Numbers
-  // Strings
-  // Booleans
-  // Undefined
-  // Null 
-  // Special (NaN, -Infinity, Infinity)
 
   // RECURSIVE CASE 
   // Arrays
@@ -56,7 +52,9 @@ var stringifyJSON = function(obj) {
     // Push string into temp array
     for (var i = 0; i < keys.length; i++) {
       var tempVal = obj[keys[i]];
-      tempArr.push(stringifyJSON(keys[i]) + ':' + stringifyJSON(tempVal));
+      if (tempVal !== undefined && typeof tempVal !== 'function') {
+        tempArr.push(stringifyJSON(keys[i]) + ':' + stringifyJSON(tempVal));
+      }
     }
 
     // Return stringified temp array, with '{', '}' at end
