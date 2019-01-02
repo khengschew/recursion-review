@@ -31,7 +31,19 @@ var stringifyJSON = function(obj) {
   // Special (NaN, -Infinity, Infinity)
 
   // RECURSIVE CASE 
-  // Objects
   // Arrays
+  // If array is array
+  // return recursive call on element
+  if (Array.isArray(obj)) {
+    var tempArr = [];
+
+    obj.forEach(function(value) {
+      tempArr.push(stringifyJSON(value));
+    });
+
+    return '[' + tempArr.toString() + ']';
+  }
+
+  // Objects
   // Nesting
 };
