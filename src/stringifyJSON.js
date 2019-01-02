@@ -45,5 +45,23 @@ var stringifyJSON = function(obj) {
   }
 
   // Objects
-  // Nesting
+  if (typeof obj === 'object') {
+    var tempArr = [];
+    // Retrieve object keys
+    var keys = Object.keys(obj);
+
+    // Loop through each object key
+    // For each key, retrieve value
+    // Generate key-value string, separated by ':'
+    // Push string into temp array
+    for (var i = 0; i < keys.length; i++) {
+      var tempVal = obj[keys[i]];
+      tempArr.push(stringifyJSON(keys[i]) + ':' + stringifyJSON(tempVal));
+    }
+
+    // Return stringified temp array, with '{', '}' at end
+    return '{' + tempArr.toString() + '}';
+  }
+
+  return undefined;
 };
