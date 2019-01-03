@@ -11,7 +11,7 @@ var getElementsByClassName = function(className, elements) {
 
   // // Inner function
   // var recurseElements = function(element) {
-    
+
   // };
 
   // tempElement = [document.body] || elements;
@@ -23,22 +23,25 @@ var getElementsByClassName = function(className, elements) {
     return [];
   }
 
+  // RECURSIVE CASE
+  // if tempElement[0] has classList && classList contains(x)
+  // Push to temp array
+  // return temp array concatenate recursive results from children, and other elements;
+  
   // If tempElement.classList contains className
   if (tempElement[0].classList && tempElement[0].classList.contains(className)) {
     tempArr.push(tempElement[0]);
   }
 
-  // If element has no children, and 'tempElement' is of length 1
-  if (tempElement.length <= 1 && tempElement[0].childNodes.length === 0) {
-    return tempArr;
+  // If tempElement has children
+  if (tempElement[0].children) {
+    // Recurse by concatenating first element and children
+    return tempArr
+      .concat(getElementsByClassName(className, tempElement[0].children))
+      .concat(getElementsByClassName(className, Array.from(tempElement).slice(1)));
+  } else {
+    // tempElement doesn't have children, recurse only on remaining elements
+    return tempArr
+      .concat(getElementsByClassName(className, Array.from(tempElement).slice(1)));
   }
-
-  // RECURSIVE CASE
-  // Push to temp array
-  // return temp array concatenate recursive results from children, and other elements;
-  return tempArr
-    .concat(getElementsByClassName(className, tempElement[0].childNodes))
-    .concat(getElementsByClassName(className, tempElement.slice(1)));
-
-  // return tempArr;
 };
